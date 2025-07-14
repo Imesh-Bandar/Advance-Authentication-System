@@ -1,6 +1,6 @@
 import express from 'express';
-import { DbConnection } from './config/DbConnection.js';
-import AuthRouter from './routes/auth.route.js';
+import { DbConnection } from './src/config/DbConnection.js';
+import AuthRouter from './src/routes/auth.route.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 dotenv.config();
