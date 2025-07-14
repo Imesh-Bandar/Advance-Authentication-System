@@ -1,0 +1,35 @@
+{
+  "name": "advance-authentication-system",
+  "version": "1.0.0",
+  "description": "<!-- MERN Stack Logo -->\r <p align=\"center\">\r   <img src=\"https://raw.githubusercontent.com/mongodb-js/leaf/master/dist/mongodb-leaf_256x256.png\" alt=\"MongoDB\" height=\"40\"/>\r   <img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg\" alt=\"React\" height=\"40\"/>\r   <img src=\"https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg\" alt=\"Node.js\" height=\"40\"/>\r   <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png\" alt=\"Express.js\" height=\"40\"/>\r </p>",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./backend/server.js",
+    "dev": "nodemon ./backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imesh-Bandar/Advance-Authentication-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Imesh-Bandar/Advance-Authentication-System/issues"
+  },
+  "homepage": "https://github.com/Imesh-Bandar/Advance-Authentication-System#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mailtrap": "^4.2.0",
+    "mongoose": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
