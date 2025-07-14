@@ -38,9 +38,36 @@ export const welcomeTemplate = ({ username }) => {
   `;
 }
 
+
+//password reset template
+export const passwordResetTemplate = ({ resetLink }) => {
+  return `
+  <div style="font-family: Arial, sans-serif;">
+    <h2>Password Reset Request</h2>
+    <p>Hello,</p>
+    <p>We received a request to reset your password. Click the link below to set a new password:</p>
+    <a href=${resetLink} style="color: #4CAF50;">Reset Password</a>
+    <p>If you did not request a password reset, please ignore this email.</p>
+  </div>
+  `;
+}
+
+export const passwordResetConfirmationTemplate = ({ username }) => {
+  return `
+  <div style="font-family: Arial, sans-serif;">
+    <h2>Password Reset Successful</h2>
+    <p>Hello ${username},</p>
+    <p>Your password has been successfully reset. You can now log in with your new password.</p>
+    <p>If you did not request this change, please contact support immediately.</p>
+  </div>
+  `;
+}
+
 // Only export once at the end
 export const mailTemplates = {
     confirmationTemplate,
     verificationTemplate,
-    welcomeTemplate
+    passwordResetTemplate,
+    welcomeTemplate,
+    passwordResetConfirmationTemplate
 };
