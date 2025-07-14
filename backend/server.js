@@ -1,22 +1,26 @@
 import express from 'express';
 import { DbConnection } from './config/DbConnection.js';
 import AuthRouter from './routes/auth.route.js';
-
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
+
+
+
+app.use(express.json());//allow json data to be send in request body
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-//DB SOURCE: mongodb+srv://imeshfsdinfo:UPcLNBT9mpDPTBHd@cluster0.ubkhpwn.mongodb.net/Auth?retryWrites=true&w=majority&appName=Cluster0
-app.use(express.json());
 
-app.use("/api/auth",AuthRouter);
-
+const PORT = process.env.PORT || 6000;
+app.use("/api/auth", AuthRouter);
 
 
-app.listen(3000, () => {
+
+app.listen(PORT, () => {
     DbConnection();
-    console.log('Server is running on port 3000');
+    console.log(`Server is running on port ${PORT} in ${process.env.NODE_ENV} mode`);
 });
 
