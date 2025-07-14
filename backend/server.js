@@ -2,12 +2,14 @@ import express from 'express';
 import { DbConnection } from './config/DbConnection.js';
 import AuthRouter from './routes/auth.route.js';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 const app = express();
 
 
 
 app.use(express.json());//allow json data to be send in request body
+app.use(cookieParser());//allow cookies to be parsed
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
@@ -16,6 +18,14 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 6000;
 app.use("/api/auth", AuthRouter);
+
+// Error handling middleware for JSON parse errors
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+        return res.status(400).json({ error: "Invalid JSON payload" });
+    }
+    next(err);
+});
 
 
 
