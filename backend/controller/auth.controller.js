@@ -2,7 +2,7 @@ import User from "../model/user.model.js";
 import bcryptjs from "bcryptjs";
 import { genarateVerificationToken } from "../utils/genarateVerificationToken.js";
 import { genarateTokenandSetCookie } from "../utils/genarateTokenandSetCookie.js";
-import { sendVerificationEmail } from "../mail/email.js";
+import { sendVerificationEmail, sendWelcomeEmail } from "../mail/email.js";
 //controller for user signup
 export const signupController = async (req, res) => {
   //get user data from request body
@@ -22,11 +22,8 @@ export const signupController = async (req, res) => {
           .status(400)
           .json({ status: "success", message: "Email already exists" });
       } else {
-
-
-
         //==================|| create new user ||==================//
-        
+
         //hashpassword
         const hashpassword = await bcryptjs.hash(password, 10);
         //generate verification token
@@ -65,7 +62,50 @@ export const signupController = async (req, res) => {
   } catch (error) {
     console.error(error);
     // Handle any unexpected errors
-    return res.status(500).json({ status: "error", message: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Internal Server Error" });
+  }
+};
+
+export const verificationEmail = async (req, res) => {
+  const { verficationToken } = req.body;
+  console.log(verficationToken);
+  try {
+    //find the user with the provided verification token
+    const user = await User.findOne({
+      verificationToken: verficationToken,
+      verificationExpires: { $gt: Date.now() }, // Check if the token is still valid
+    });
+
+    //if user not found or token is expiresd
+    if (!user) {
+      return res
+        .status(400)
+        .json({
+          status: "error",
+          message: "Invalid or expired verification token",
+        });
+    } else {
+      user.isVerified = true;
+      user.verificationToken = null; // Clear the verification token
+      user.verificationExpires = null; // Clear the verification expiration date
+      await user.save(); // Save the updated user document
+
+      //send welcome email
+      await sendWelcomeEmail(user.email, user.username);
+
+      // Respond with success
+      return res
+        .status(200)
+        .json({ status: "success", message: "Email verified successfully" });
+    }
+  } catch (error) {
+    // Handle any errors that occur during the verification process
+    return res
+      .status(500)
+      .json({ status: "error", message: "Internal Server Error" });
+    console.error(error);
   }
 };
 
