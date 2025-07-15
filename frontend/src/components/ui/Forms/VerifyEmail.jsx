@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 
-const RestForm = () => {
-    const [email, setEmail] = useState('')
+const VerifyEmail = () => {
+    const [code, setCode] = useState('')
 
     const handleChange = (e) => {
         const { value } = e.target;
-        setEmail(value);
+        setCode(value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // handle reset password logic here
+        // handle verify email logic here
     }
 
     return (
@@ -21,29 +21,30 @@ const RestForm = () => {
         >
             <div className="mb-5 text-center">
                 <h3 className="text-xl font-semibold text-blue-900 mb-1 tracking-tight">
-                    Reset your password
+                    Verify your email
                 </h3>
                 <p className="text-xs text-blue-400">
-                    Enter your email to receive reset instructions
+                    Enter the verification code sent to your email
                 </p>
             </div>
-            <div className="space-y-6">
-                <div className="relative">
+            <div className="flex justify-center">
+                <div className="relative w-32">
                     <input
-                        className="peer w-full px-4 py-2 border border-blue-100 rounded-lg bg-white/80 focus:border-blue-300 focus:ring-2 focus:ring-blue-50 outline-none transition placeholder-transparent text-blue-900 font-medium shadow-sm"
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={email}
+                        className="peer w-full text-center tracking-widest text-lg px-2 py-2 border border-blue-100 rounded-lg bg-white/80 focus:border-blue-300 focus:ring-2 focus:ring-blue-50 outline-none transition placeholder-transparent text-blue-900 font-semibold shadow-sm"
+                        type="text"
+                        id="code"
+                        name="code"
+                        value={code}
                         onChange={handleChange}
                         required
-                        autoComplete="email"
+                        autoComplete="one-time-code"
                         placeholder=" "
-                        style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
+                        maxLength={6}
+                        style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif", letterSpacing: "0.2em" }}
                     />
                     <label
-                        htmlFor="email"
-                        className="absolute left-4 top-2 text-blue-300 text-sm transition-all
+                        htmlFor="code"
+                        className="absolute left-1/2 -translate-x-1/2 top-2 text-blue-300 text-sm transition-all
                             peer-placeholder-shown:top-2
                             peer-placeholder-shown:text-sm
                             peer-placeholder-shown:text-blue-300
@@ -58,7 +59,7 @@ const RestForm = () => {
                             bg-white/80"
                         style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
                     >
-                        Email
+                        Code
                     </label>
                 </div>
             </div>
@@ -67,10 +68,10 @@ const RestForm = () => {
                 className="w-full py-2 bg-gradient-to-r from-blue-400 to-indigo-400 text-white font-semibold rounded-lg shadow hover:from-blue-500 hover:to-indigo-500 transition text-base tracking-wide"
                 style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
             >
-                Reset Password
+                Verify Email
             </button>
         </form>
     )
 }
 
-export default RestForm
+export default VerifyEmail

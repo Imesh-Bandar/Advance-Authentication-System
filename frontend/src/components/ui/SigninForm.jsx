@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 const SigninForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({
+        email: '',
+        password: '',
+    });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === 'email') setEmail(value);
-        if (name === 'password') setPassword(value);
+        setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -32,7 +32,7 @@ const SigninForm = () => {
                         type="email"
                         id="email"
                         name="email"
-                        value={email}
+                        value={form.email}
                         onChange={handleChange}
                         required
                         autoComplete="email"
@@ -65,7 +65,7 @@ const SigninForm = () => {
                         type="password"
                         id="password"
                         name="password"
-                        value={password}
+                        value={form.password}
                         onChange={handleChange}
                         required
                         autoComplete="current-password"

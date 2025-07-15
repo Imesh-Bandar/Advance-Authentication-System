@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { api } from '../../../lib/api.js'
 const Signupform = () => {
+
     const [form, setForm] = useState({
         username: '',
         email: '',
@@ -11,9 +13,22 @@ const Signupform = () => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
+
         e.preventDefault();
-        // handle signup logic here
+        try{
+            const response =await api.post('/auth/signup', form);
+            if(response.status === 201){
+                alert('Signup Successfull');
+            }else{
+                alert('Signup Failed');
+            }
+
+        }catch(err){
+            console.error("Signup error:", err);
+        }
+
+    
     };
 
     return (

@@ -9,6 +9,7 @@ import AuthLayout from './components/layouts/AuthLayout.jsx'
 import Signupform from './components/ui/Forms/Signupform.jsx'
 import SigninForm from './components/ui/Forms/SigninForm.jsx'
 import RestForm from './components/ui/Forms/RestForm.jsx'
+import VerifyEmail from './components/ui/Forms/VerifyEmail.jsx'
 
 function App() {
   // Debug: Check if component renders
@@ -49,6 +50,14 @@ function App() {
             element={
               <AuthLayout title="Forgot Password">
                 <RestForm />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/verify-email"
+            element={
+              <AuthLayout title="Verify Email">
+                <VerifyEmail />
               </AuthLayout>
             }
           />

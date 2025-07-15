@@ -3,10 +3,7 @@ import React, { useState } from 'react'
 const RestForm = () => {
     const [email, setEmail] = useState('')
 
-    const handleChange = (e) => {
-        const { value } = e.target;
-        setEmail(value);
-    };
+    const handleChange = (e) => setEmail(e.target.value)
 
     const handleSubmit = (e) => {
         e.preventDefault()

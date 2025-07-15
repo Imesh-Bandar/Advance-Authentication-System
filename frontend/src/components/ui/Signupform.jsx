@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-const SigninForm = () => {
+const Signupform = () => {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        if (name === 'username') setUsername(value);
         if (name === 'email') setEmail(value);
         if (name === 'password') setPassword(value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // handle signin logic here
+        // handle signup logic here
     };
 
     return (
@@ -22,10 +24,43 @@ const SigninForm = () => {
             style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
         >
             <div className="mb-5 text-center">
-                <h3 className="text-xl font-semibold text-blue-900 mb-1 tracking-tight">Sign in to your account</h3>
-                <p className="text-xs text-blue-400">Welcome back! Please enter your details.</p>
+                <h3 className="text-xl font-semibold text-blue-900 mb-1 tracking-tight">Create your account</h3>
+                <p className="text-xs text-blue-400">Sign up to get started with our service</p>
             </div>
             <div className="space-y-6">
+                <div className="relative">
+                    <input
+                        className="peer w-full px-4 py-2 border border-blue-100 rounded-lg bg-white/80 focus:border-blue-300 focus:ring-2 focus:ring-blue-50 outline-none transition placeholder-transparent text-blue-900 font-medium shadow-sm"
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={username}
+                        onChange={handleChange}
+                        required
+                        autoComplete="username"
+                        placeholder=" "
+                        style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
+                    />
+                    <label
+                        htmlFor="username"
+                        className="absolute left-4 top-2 text-blue-300 text-sm transition-all
+                            peer-placeholder-shown:top-2
+                            peer-placeholder-shown:text-sm
+                            peer-placeholder-shown:text-blue-300
+                            peer-focus:-top-4
+                            peer-focus:text-xs
+                            peer-focus:text-blue-500
+                            peer-focus:bg-white/80
+                            px-1 pointer-events-none font-medium
+                            peer-not-placeholder-shown:-top-4
+                            peer-not-placeholder-shown:text-xs
+                            peer-not-placeholder-shown:text-blue-500
+                            bg-white/80"
+                        style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
+                    >
+                        Username
+                    </label>
+                </div>
                 <div className="relative">
                     <input
                         className="peer w-full px-4 py-2 border border-blue-100 rounded-lg bg-white/80 focus:border-blue-300 focus:ring-2 focus:ring-blue-50 outline-none transition placeholder-transparent text-blue-900 font-medium shadow-sm"
@@ -68,7 +103,7 @@ const SigninForm = () => {
                         value={password}
                         onChange={handleChange}
                         required
-                        autoComplete="current-password"
+                        autoComplete="new-password"
                         placeholder=" "
                         style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
                     />
@@ -98,22 +133,16 @@ const SigninForm = () => {
                 className="w-full py-2 bg-gradient-to-r from-blue-400 to-indigo-400 text-white font-semibold rounded-lg shadow hover:from-blue-500 hover:to-indigo-500 transition text-base tracking-wide"
                 style={{ fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif" }}
             >
-                Sign In
+                Sign Up
             </button>
             <p className="text-center text-xs text-blue-400 mt-3">
-                Don't have an account?{' '}
-                <Link to="/signup" className="text-indigo-500 hover:underline font-medium">
-                    Sign up
-                </Link>
-            </p>
-            <p className="text-center text-xs text-blue-400 mt-2">
-                Forgot your password?{' '}
-                <Link to='/forgot-password' className="text-indigo-500 hover:underline font-medium">
-                    Reset it
+                Already have an account?{' '}
+                <Link to="/login" className="text-indigo-500 hover:underline font-medium">
+                    Log in
                 </Link>
             </p>
         </form>
     );
 };
 
-export default SigninForm
+export default Signupform;
