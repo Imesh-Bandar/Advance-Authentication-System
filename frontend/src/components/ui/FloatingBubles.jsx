@@ -55,7 +55,7 @@ const FloatingBubles = () => {
             />
             {/* Moving bubbles */}
             {bubbles.map((bubble, idx) => (
-                <div
+                <divdesig
                     key={idx}
                     className={`${bubble.className} animate-soft-bounce`}
                     style={bubble.style}
